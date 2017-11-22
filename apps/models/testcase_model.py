@@ -7,12 +7,12 @@
 
 from base_model import BaseModel
 from sqlalchemy import Column, String, DateTime, Integer, Numeric, BigInteger, Boolean, Table, ForeignKey, Text
-
+from apps.extensions import db
 
 testcase_users = Table(
-        'testcase_users', BaseModel.metadata,
-        Column('user_id', Integer, ForeignKey('users.id')),
-        Column('test_id', Integer, ForeignKey('test_case.id'))
+    'testcase_users', BaseModel.metadata,
+    Column('user_id', Integer, ForeignKey('users.id')),
+    Column('test_id', Integer, ForeignKey('test_case.id'))
 )
 
 
@@ -45,6 +45,9 @@ class TestCase(BaseModel):
         self.hash_id = kwargs['hash_id']
         self.status = kwargs['status']
 
-
-
-
+    @staticmethod
+    def get_list_data():
+        return db.session.query(TestCase.id,
+                                TestCase.hash_id,
+                                TestCase.name,
+                                TestCase.status,).all()

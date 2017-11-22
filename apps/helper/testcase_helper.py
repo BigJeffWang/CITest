@@ -64,3 +64,15 @@ def testcase_helper():
     to_users = []
     [to_users.extend(i) for i in Users.get_all_mail()]
     send_mail(file_path, to_users)
+
+
+def testcase_list_helper():
+    return [[u'id', u'hash_id', u'name', u'status']].extend(TestCase.get_list_data())
+
+
+def testcase_update_helper():
+    return
+
+
+def testcase_delete_helper():
+    return

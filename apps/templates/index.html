@@ -57,6 +57,10 @@
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
 					<ul class="nav pull-right">
+						<li><a href="/testcase">手动执行测试</a></li>
+						<li><a href="/testcase/set">添加测试用例</a></li>
+						<li><a href="/testcase/list">修改测试用例</a></li>
+						<li><a href="/user/add">添加测试用户</a></li>
 						<li class="dropdown hidden-phone">
 							<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 								<i class="icon-bell"></i>
@@ -1110,3 +1114,22 @@
 	
 </body>
 </html>
+
+<%
+messages = get_flashed_messages()
+num = len(messages)
+%>
+<script type="text/javascript">
+(function () {
+var num = ${num}
+if(num>0)
+{
+	var messages = new Array()
+	messages = ${messages}
+	for (var i=0; i<num; i++)
+	{
+	  alert(messages[i]);
+	}
+}
+})();
+</script>

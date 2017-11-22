@@ -14,8 +14,9 @@ ${ parent.head() }
     }
 
     table.hovertable {
-        text-align: center;
-        width: 500px;
+        text-align: left;
+        margin-left: 25%;
+        width: 50%;
         font-family: verdana, arial, sans-serif;
         font-size: 11px;
         color: #333333;
@@ -40,11 +41,18 @@ ${ parent.head() }
     }
 
     table.hovertable td {
+
         border-width: 1px;
         padding: 8px;
         border-style: solid;
         border-color: #a9c6c9;
     }
+
+    table.hovertable td.aa {
+
+        width: 20px;
+    }
+
 </style>
 </%block>
 
@@ -69,9 +77,11 @@ ${ parent.head() }
 </%def>
 
 <%def name="makerow(row)">
-<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';" >
+<tr onmouseover="this.style.backgroundColor='#FFCCCC';" onmouseout="this.style.backgroundColor='#d4e3e5';" >
     % for name in row:
     <td>${name}</td>
     % endfor
+    <td class="aa"><button>modify</button></td>
+    <td class="aa"><button>delete</button></td>
 </tr>
 </%def>
