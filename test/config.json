@@ -1,0 +1,53 @@
+{
+  "es": {
+    "es_url": "http://urpdev.360fan.com",
+    "es_port": 80,
+    "es_username": "detaanalysis",
+    "es_password": "wrtx9079LCF"
+  },
+  "database": {
+    "rs_dev": {
+      "db": "rs_dev",
+      "host": "10.10.37.183",
+      "password": "rsdev",
+      "user": "rsdev"
+    },
+    "rs_pd": {
+      "db": "fandapd",
+      "host": "10.10.121.177",
+      "password": "2230d51741ce",
+      "user": "fanda"
+    },
+    "licaifan_dev": {
+      "host": "10.10.11.239",
+      "port": 3306,
+      "user": "licaifan_for_da",
+      "password": "6654E307E19D",
+      "db": "licaifan",
+      "charset": "utf8mb4"
+    },
+    "licaifan_pd": {
+      "host": "10.10.11.239",
+      "port": 3306,
+      "user": "licaifan_for_da",
+      "password": "6654E307E19D",
+      "db": "licaifan",
+      "charset": "utf8mb4"
+    }
+  },
+  "mq": {
+    "mq_dev": {
+      "host": "10.10.117.211",
+      "queue": "",
+      "user_name": "dapd",
+      "password": "DaDa"
+    },
+    "mq_pd": {
+      "host": "10.10.117.211",
+      "queue": "",
+      "user_name": "dapd",
+      "password": "DaDa"
+    }
+  },
+  "env": "dev"
+}

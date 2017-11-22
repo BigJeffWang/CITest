@@ -1,0 +1,55 @@
+<%inherit file="base.html"/>
+
+<%def name="title()">测试用例-配置</%def>
+<%block name="head">
+    ${ parent.head() }
+    <style type="text/css">
+        .body {
+          with: 100%;
+        }
+        .center {
+          text-align: center;
+        }
+
+    </style>
+</%block>
+
+<%block name="content">
+    <div class="body">
+    <div class="center">
+    <h1>测试用例-配置</h1>
+    <p class="important">
+        <form action="/testcase/set" method="post">
+            name: <input name="name" value=""><br />
+            url: <input name="url" value=""><br />
+            method: <select name="method" >
+                <option value="GET">GET</option>
+                <option value="POST">POST</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="PATCH">PATCH</option>
+                <option value="HEAD">HEAD</option>
+                <option value="JSONP">JSONP</option>
+                <option value="CUSTOM">CUSTOM</option>
+            </select><br />
+            headers:<input name="headers" value=""><br />
+            parameters content:<br />
+            <textarea name="parameters" rows="8" cols="30" placeholder="It must be in json format!"></textarea><br />
+            permission confirm:
+            NO<input name="permission_confirm" type="radio" value="0" checked="checked">
+            YES<input name="permission_confirm" type="radio" value="1"><br />
+            token confirm:
+            NO<input name="token_confirm" type="radio" value="0" checked="checked">
+            YES<input name="token_confirm" type="radio" value="1"><br />
+            response confirm:
+            NO<input name="response_confirm" type="radio" value="0" checked="checked">
+            YES<input name="response_confirm" type="radio" value="1"><br />
+            response content:<br />
+            <textarea name="response_content" rows="8" cols="30" placeholder="It must be in json format!"></textarea><br />
+            <input type="reset" value="reset"> <input type="submit" value="submit">
+        </form>
+    </p>
+    </div>
+    </div>
+</%block>
+

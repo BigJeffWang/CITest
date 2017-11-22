@@ -1,0 +1,77 @@
+<%inherit file="base.html"/>
+
+<%def name="title()">测试用例-列表</%def>
+<%block name="head">
+${ parent.head() }
+<style type="text/css">
+    .body {
+        with: 100%;
+    }
+
+    .center {
+        text-align: center;
+        width: 100%;
+    }
+
+    table.hovertable {
+        text-align: center;
+        width: 500px;
+        font-family: verdana, arial, sans-serif;
+        font-size: 11px;
+        color: #333333;
+        border-width: 1px;
+        border-color: #999999;
+        border-collapse: collapse;
+
+    }
+
+    table.hovertable th {
+        background-color: #c3dde0;
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+
+    }
+
+    table.hovertable tr {
+        background-color: #d4e3e5;
+
+    }
+
+    table.hovertable td {
+        border-width: 1px;
+        padding: 8px;
+        border-style: solid;
+        border-color: #a9c6c9;
+    }
+</style>
+</%block>
+
+<%block name="content">
+<div class="body">
+    <div class="center">
+        <h1>测试用例-列表</h1>
+        <p class="important">
+            ${main()}
+        </p>
+    </div>
+</div>
+</%block>
+
+
+<%def name="main()">
+<table class="hovertable" >
+    % for row in rows:
+    ${makerow(row)}
+    % endfor
+</table>
+</%def>
+
+<%def name="makerow(row)">
+<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';" >
+    % for name in row:
+    <td>${name}</td>
+    % endfor
+</tr>
+</%def>
