@@ -24,12 +24,13 @@ class TestCase(BaseModel):
     method = Column(String(10), default='get')  # request method
     headers = Column(String(512))  # request headers 额外
     parameters = Column(String(1024))  # request parameters 请求参数
-    permission_confirm = Column(Boolean())  # 是否开启权限认证 0 1
+    permission_confirm = Column(Boolean(), default=0)  # 是否开启权限认证 0 1
     token_confirm = Column(String(256))  # 记录token
-    response_confirm = Column(Boolean())  # 是否开启返回值验证 response存值和返回相同
+    response_confirm = Column(Boolean(), default=0)  # 是否开启返回值验证 response存值和返回相同
     response_content = Column(Text)  # 是否开启返回值验证 response存值和返回相同
     hash_id = Column(String(64))  # 生成文件的hash ID
-    status = Column(Boolean())  # 状态,是否激活该测试用例 1代表激活
+    status = Column(Boolean(), default=1)  # 假删除 1代表存在
+    exec_status = Column(Boolean(), default=1)  # 状态,是否激活该测试用例 1代表激活
 
     def __init__(self, *args, **kwargs):
         super(TestCase, self).__init__(*args, **kwargs)
@@ -44,6 +45,8 @@ class TestCase(BaseModel):
         self.response_content = kwargs['response_content']
         self.hash_id = kwargs['hash_id']
         self.status = kwargs['status']
+        self.status = kwargs['exec_status']
+
 
     @staticmethod
     def get_list_data():

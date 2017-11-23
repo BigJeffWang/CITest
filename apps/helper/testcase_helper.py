@@ -19,6 +19,7 @@ import os
 def testcase_set_helper(request_data):
     request_data['hash_id'] = get_hash_id()
     request_data['status'] = 1  # 默认配置增加直接激活
+    request_data['exec_status'] = 1  # 默认配置增加直接激活
     testcase = TestCase(name=request_data['name'],
                         url=request_data['url'],
                         method=request_data['method'],
@@ -29,7 +30,8 @@ def testcase_set_helper(request_data):
                         response_confirm=request_data['response_confirm'],
                         response_content=request_data['response_content'],
                         hash_id=request_data['hash_id'],
-                        status=request_data['status'])
+                        status=request_data['status'],
+                        exec_status=request_data['exec_status'])
 
     try:
         db.session.add(testcase)
