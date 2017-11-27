@@ -189,11 +189,11 @@ function showOutput(id, name) {
 
 <div class='heading'>
 <h1>RollingStone自动化测试报告</h1>
-<p class='attribute'><strong>Start Time:</strong> 2017-11-21 17:41:36</p>
-<p class='attribute'><strong>Duration:</strong> 0:00:00.055903</p>
-<p class='attribute'><strong>Status:</strong> Pass 2 Failure 1</p>
+<p class='attribute'><strong>Start Time:</strong> 2017-11-27 10:21:08</p>
+<p class='attribute'><strong>Duration:</strong> 0:00:00.361121</p>
+<p class='attribute'><strong>Status:</strong> Pass 1 Failure 2</p>
 
-<p class='description'>具体执行报告请点击链接下载查看: http://127.0.0.1:5000/2017_11_21_17_41_36_report.html</p>
+<p class='description'>具体执行报告请点击链接下载查看: http://127.0.0.1:8080/download/2017_11_27_10_21_08_report.html具体执行报告请点击链接在线查看: http://127.0.0.1:8080/report/2017_11_27_10_21_08_report.html</p>
 </div>
 
 
@@ -221,53 +221,89 @@ function showOutput(id, name) {
     <td>View</td>
 </tr>
 
-<tr class='passClass'>
-    <td>testcase20171121123036uAERwF_sta.Test</td>
-    <td>1</td>
+<tr class='failClass'>
+    <td>testcase_20171127015021gOxU4s_testget_sta.Test</td>
     <td>1</td>
     <td>0</td>
+    <td>1</td>
     <td>0</td>
     <td><a href="javascript:showClassDetail('c1',1)">Detail</a></td>
 </tr>
 
-<tr id='pt1.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>test1</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr class='failClass'>
-    <td>aaaa_sta.CalTest</td>
-    <td>2</td>
-    <td>1</td>
-    <td>1</td>
-    <td>0</td>
-    <td><a href="javascript:showClassDetail('c2',2)">Detail</a></td>
-</tr>
-
-<tr id='pt2.1' class='hiddenRow'>
-    <td class='none'><div class='testcase'>testA</div></td>
-    <td colspan='5' align='center'>pass</td>
-</tr>
-
-<tr id='ft2.2' class='none'>
-    <td class='failCase'><div class='testcase'>testB</div></td>
+<tr id='ft1.1' class='none'>
+    <td class='failCase'><div class='testcase'>testcase</div></td>
     <td colspan='5' align='center'>
 
     <!--css div popup start-->
-    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft2.2')" >
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft1.1')" >
         fail</a>
 
-    <div id='div_ft2.2' class="popup_window">
+    <div id='div_ft1.1' class="popup_window">
         <div style='text-align: right; color:red;cursor:pointer'>
-        <a onfocus='this.blur();' onclick="document.getElementById('div_ft2.2').style.display = 'none' " >
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft1.1').style.display = 'none' " >
            [x]</a>
         </div>
         <pre>
         
-ft2.2: Traceback (most recent call last):
-  File "/Users/licaifan/workspace/CITest/apps/spiders/aaaa_sta.py", line 18, in testB
-    self.assertEqual(expected, result)
-AssertionError: 0 != 3
+ft1.1: Traceback (most recent call last):
+  File "/Users/licaifan/workspace/CITest/apps/spiders/testcase_20171127015021gOxU4s_testget_sta.py", line 31, in testcase
+    self.assertEqual(response.status_code, 200)
+AssertionError: 404 != 200
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr class='passClass'>
+    <td>testcase_201711271019296m2MCz_testbaidu_sta.Test</td>
+    <td>1</td>
+    <td>1</td>
+    <td>0</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c2',1)">Detail</a></td>
+</tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>testcase</div></td>
+    <td colspan='5' align='center'>pass</td>
+</tr>
+
+<tr class='failClass'>
+    <td>testcase_20171127015058AYfo0k_testpost_sta.Test</td>
+    <td>1</td>
+    <td>0</td>
+    <td>1</td>
+    <td>0</td>
+    <td><a href="javascript:showClassDetail('c3',1)">Detail</a></td>
+</tr>
+
+<tr id='ft3.1' class='none'>
+    <td class='failCase'><div class='testcase'>testcase</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft3.1')" >
+        fail</a>
+
+    <div id='div_ft3.1' class="popup_window">
+        <div style='text-align: right; color:red;cursor:pointer'>
+        <a onfocus='this.blur();' onclick="document.getElementById('div_ft3.1').style.display = 'none' " >
+           [x]</a>
+        </div>
+        <pre>
+        
+ft3.1: Traceback (most recent call last):
+  File "/Users/licaifan/workspace/CITest/apps/spiders/testcase_20171127015058AYfo0k_testpost_sta.py", line 39, in testcase
+    self.assertDictEqual(json.loads(response.text.encode('utf8')), json.loads(response_content))
+AssertionError: {u'success': u'POST'} != {u'success': u'POST1'}
+- {u'success': u'POST'}
++ {u'success': u'POST1'}
+?                    +
+
 
 
         </pre>
@@ -280,8 +316,8 @@ AssertionError: 0 != 3
 <tr id='total_row'>
     <td>Total</td>
     <td>3</td>
-    <td>2</td>
     <td>1</td>
+    <td>2</td>
     <td>0</td>
     <td>&nbsp;</td>
 </tr>

@@ -1,0 +1,17 @@
+<%def name="main()">
+<table class="hovertable" >
+    % for row in rows:
+    ${makerow(row)}
+    % endfor
+</table>
+</%def>
+
+<%def name="makerow(row)">
+<tr onmouseover="this.style.backgroundColor='#FFCCCC';" onmouseout="this.style.backgroundColor='#d4e3e5';" >
+    % for name in row:
+    <td>${name}</td>
+    % endfor
+    <td class="updateTr"><button >modify</button></td>
+    <td class="deleteTr"><button >delete</button></td>
+</tr>
+</%def>

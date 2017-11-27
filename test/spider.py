@@ -17,3 +17,10 @@ req = urllib2.Request(url)
 response = urllib2.urlopen(req)
 the_page = response.read()
 print the_page
+print response.code
+print type(response.code)
+
+if 0:
+    print 000
+else:
+    print 111

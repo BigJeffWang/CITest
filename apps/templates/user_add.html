@@ -1,17 +1,8 @@
 <%inherit file="base.html"/>
-
+<%namespace name="utils" file="utils.html" />
 <%def name="title()">用户-注册</%def>
 <%block name="head">
     ${ parent.head() }
-    <style type="text/css">
-        .body {
-          with: 100%;
-        }
-        .center {
-          text-align: center;
-        }
-
-    </style>
 </%block>
 
 <%block name="content">
@@ -25,7 +16,29 @@
             <input type="reset" value="reset"> <input type="submit" value="submit">
         </form>
     </p>
+    <p class="important">
+        ${utils.main()}
+    </p>
     </div>
     </div>
 </%block>
+
+<%def name="main1()">
+<table class="hovertable" >
+    % for row in rows:
+    ${makerow(row)}
+    % endfor
+</table>
+</%def>
+
+<%def name="makerow(row)">
+<tr onmouseover="this.style.backgroundColor='#FFCCCC';" onmouseout="this.style.backgroundColor='#d4e3e5';" >
+    % for name in row:
+    <td>${name}</td>
+    % endfor
+    <td class="updateTr"><button >modify</button></td>
+    <td class="deleteTr"><button >delete</button></td>
+</tr>
+</%def>
+
 

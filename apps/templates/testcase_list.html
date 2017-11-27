@@ -1,87 +1,165 @@
 <%inherit file="base.html"/>
+<%namespace name="utils" file="utils.html" />
 
 <%def name="title()">测试用例-列表</%def>
 <%block name="head">
 ${ parent.head() }
-<style type="text/css">
-    .body {
-        with: 100%;
-    }
-
-    .center {
-        text-align: center;
-        width: 100%;
-    }
-
-    table.hovertable {
-        text-align: left;
-        margin-left: 25%;
-        width: 50%;
-        font-family: verdana, arial, sans-serif;
-        font-size: 11px;
-        color: #333333;
-        border-width: 1px;
-        border-color: #999999;
-        border-collapse: collapse;
-
-    }
-
-    table.hovertable th {
-        background-color: #c3dde0;
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #a9c6c9;
-
-    }
-
-    table.hovertable tr {
-        background-color: #d4e3e5;
-
-    }
-
-    table.hovertable td {
-
-        border-width: 1px;
-        padding: 8px;
-        border-style: solid;
-        border-color: #a9c6c9;
-    }
-
-    table.hovertable td.aa {
-
-        width: 20px;
-    }
-
-</style>
 </%block>
 
 <%block name="content">
 <div class="body">
+    <div id="fade" class="black_overlay"></div>
+    <div id="MyDiv" class="white_content">
+        <div style="text-align: right; cursor: default; height: 40px;">
+            <span style="font-size: 16px;" onclick="CloseDiv('MyDiv','fade')"><button>关闭</button></span>
+        </div>
+        <div class="update_content"></div>
+    </div>
     <div class="center">
         <h1>测试用例-列表</h1>
+        <p><button><a href="/" >返回首页</a></button><button><a href="/testcase/list/all" >全部用例</a></button><button><a href="/testcase/list/part" >可用用例</a></button></p>
         <p class="important">
-            ${main()}
+            ${utils.main()}
         </p>
     </div>
 </div>
+<script type="text/javascript">
+    //弹出隐藏层
+    function ShowDiv(show_div, bg_div) {
+        document.getElementById(show_div).style.display = 'block';
+        document.getElementById(bg_div).style.display = 'block';
+        var bgdiv = document.getElementById(bg_div);
+        bgdiv.style.width = document.body.scrollWidth;
+        $("#" + bg_div).height($(document).height());
+    }
+
+    //关闭弹出层
+    function CloseDiv(show_div, bg_div) {
+        document.getElementById(show_div).style.display = 'none';
+        document.getElementById(bg_div).style.display = 'none';
+    }
+
+    function UpdateContent(data) {
+        var centent =
+            '<div class="center">' +
+            '<form action="/testcase/update/set" method="post">' +
+            'id: <input name="id" readonly  unselectable="on" value=""><br />' +
+            'hash_id: <input name="hash_id" readonly  unselectable="on" value=""><br />' +
+            'name: <input type="text" name="name" value=""><br />&nbsp;&nbsp;&nbsp;' +
+            'url: <input type="text" name="url" value=""><br />' +
+            'method: <select name="method" value="">' +
+            '            <option value="GET">GET</option>' +
+            '            <option value="POST">POST</option>' +
+            '            <option value="PUT">PUT</option>' +
+            '            <option value="DELETE">DELETE</option>' +
+            '            <option value="PATCH">PATCH</option>' +
+            '            <option value="HEAD">HEAD</option>' +
+            '            <option value="JSONP">JSONP</option>' +
+            '            <option value="CUSTOM">CUSTOM</option>' +
+            '        </select><br />' +
+            '        headers:<br /><textarea name="headers" rows="8" cols="30" placeholder="It must be in json format!"></textarea><br />' +
+            '        parameters content:<br />' +
+            '        <textarea name="parameters" rows="8" cols="30" placeholder="It must be in json format!"></textarea><br />' +
+            '        permission confirm:\n' +
+            '        NO<input name="permission_confirm" type="radio" value="0">' +
+            '        YES<input name="permission_confirm" type="radio" value="1"><br />' +
+            '        token confirm:\n' +
+            '        NO<input name="token_confirm" type="radio" value="0">' +
+            '        YES<input name="token_confirm" type="radio" value="1"><br />' +
+            '        response confirm:\n' +
+            '        NO<input name="response_confirm" type="radio" value="0">' +
+            '        YES<input name="response_confirm" type="radio" value="1"><br />' +
+            '        <div id = "display" style="display:block" >' +
+            '        response content:<br />' +
+            '        <textarea name="response_content"  rows="8" cols="30" placeholder="It must be in json format!"></textarea><br />' +
+            '        </div>' +
+            '        status:' +
+            '        NO<input name="status" type="radio" value="0">' +
+            '        YES<input name="status" type="radio" value="1"><br />' +
+            '        exec_status:' +
+            '        NO<input name="exec_status" type="radio" value="0">' +
+            '        YES<input name="exec_status" type="radio" value="1"><br />' +
+            '        <input type="reset" value="reset"> <input name = "submit" type="submit" value="submit">' +
+            '</form>' +
+            '</div>'
+        $(".update_content").html(centent);
+        $("input[name='id']").val(data['id']);
+        $("input[name='hash_id']").val(data['hash_id']);
+        $("input[name='name']").val(data['name']);
+        $("input[name='url']").val(data['url']);
+        $("select[name='method']").val(data['method']);
+        $("textarea[name='headers']").val(data['headers']);
+        $("textarea[name='parameters']").val(data['parameters']);
+        $("input[name='permission_confirm'][value='" + data['permission_confirm'] + "']").prop("checked", "checked");
+        $("input[name='token_confirm'][value='" + data['token_confirm'] + "']").prop("checked", "checked");
+        $("input[name='response_confirm'][value='" + data['response_confirm'] + "']").prop("checked", "checked");
+        $("textarea[name='response_content']").val(data['response_content']);
+        $("input[name='status'][value='" + data['status'] + "']").prop("checked", "checked");
+        $("input[name='exec_status'][value='" + data['exec_status'] + "']").prop("checked", "checked");
+
+    }
+
+</script>
+<script type="text/javascript">
+(function(){
+    $(".updateTr").click(function() {
+        var tr = $(this).siblings().eq(0);
+        var id = tr.text();
+        var update_data = "";
+        $.post("/testcase/update", {id:id}, function (data) {
+            UpdateContent(data);
+        });
+        ShowDiv('MyDiv','fade');
+    });
+    $(".deleteTr").click(function() {
+        var tr = $(this).siblings().eq(0);
+        var id = tr.text();
+        $.post("/testcase/delete", {id:id}, function (msg) {
+            alert(msg['msg']);
+            window.location.reload();
+        });
+    });
+    $("input[name='response_confirm']").click(function(){
+        if ($(this).val() == "1")
+        {
+            $("#display").css("display", "block");
+        }
+        else
+        {
+            $("#display").css("display", "none");
+        }
+    });
+})();
+
+</script>
+
+<%
+messages = get_flashed_messages()
+num = len(messages)
+%>
+
+<script type="text/javascript">
+(function () {
+var num = ${num}
+if(num>0)
+{
+	var messages = new Array()
+	messages = ${messages}
+	for (var i=0; i<num; i++)
+	{
+	  alert(messages[i]);
+	}
+}
+
+
+})();
+</script>
 </%block>
 
 
-<%def name="main()">
-<table class="hovertable" >
-    % for row in rows:
-    ${makerow(row)}
-    % endfor
-</table>
-</%def>
 
-<%def name="makerow(row)">
-<tr onmouseover="this.style.backgroundColor='#FFCCCC';" onmouseout="this.style.backgroundColor='#d4e3e5';" >
-    % for name in row:
-    <td>${name}</td>
-    % endfor
-    <td class="aa"><button>modify</button></td>
-    <td class="aa"><button>delete</button></td>
-</tr>
-</%def>
+
+
+
+
+

@@ -14,12 +14,13 @@ import time
 from HTMLTestRunner import HTMLTestRunner
 import unittest
 import os
+from apps.helper.testcase_build import testcase_delete, testcase_update_file, testcase_confirm_bak
 
 
 def testcase_set_helper(request_data):
     request_data['hash_id'] = get_hash_id()
-    request_data['status'] = 1  # 默认配置增加直接激活
-    request_data['exec_status'] = 1  # 默认配置增加直接激活
+    request_data['status'] = '1'  # 默认配置增加直接激活
+    request_data['exec_status'] = '1'  # 默认配置增加直接激活
     testcase = TestCase(name=request_data['name'],
                         url=request_data['url'],
                         method=request_data['method'],
@@ -38,20 +39,23 @@ def testcase_set_helper(request_data):
         db.session.commit()
     except:
         db.session.rollback()
+        return False
 
     testcase_build(request_data)
+    return True
 
 
 def testcase_helper():
     report_file = "/" + time.strftime("%Y_%m_%d_%H_%M_%S") + '_report.html'
     parent_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    report_path = parent_path + '/report'
+    report_path = parent_path + '/templates/report'
     testcase_path = parent_path + '/spiders'
     filename = report_path + report_file
-    description = "具体执行报告请点击链接下载查看: http://127.0.0.1:5000" + report_file
+    description = "具体执行报告请点击链接下载查看: http://127.0.0.1:8080/download" + report_file + "具体执行报告请点击链接在线查看: http://127.0.0.1:8080/report" + report_file
     with open(filename, 'wb') as fp:
         runner = HTMLTestRunner(
             stream=fp,
+            # verbosity=2,
             title='RollingStone自动化测试报告',
             description=description
         )
@@ -68,13 +72,34 @@ def testcase_helper():
     send_mail(file_path, to_users)
 
 
-def testcase_list_helper():
-    return [[u'id', u'hash_id', u'name', u'status']].extend(TestCase.get_list_data())
+def testcase_list_helper(status):
+    table_data = [[u'id', u'hash_id', u'name', u'exec_status', u'status']]
+    list_data = TestCase.get_list_data(status)
+    table_data.extend(list_data)
+    return table_data
 
 
-def testcase_update_helper():
-    return
+def testcase_update_helper(request_data):
+    data = TestCase.get_update_data(request_data)
+    return data
 
 
-def testcase_delete_helper():
-    return
+def testcase_delete_helper(request_data):
+    hash_id, name = TestCase.delete_list_data(request_data)
+    testcase_delete(hash_id, name, 1)
+
+
+def testcase_update_set_helper(request_data):
+    hash_id, status, exec_status = request_data['hash_id'], request_data['status'], request_data['exec_status']
+    TestCase.get_update_data_set(request_data)
+    bak_status = 1 if testcase_confirm_bak(hash_id) else 0
+    new_status = int(status) + int(exec_status)
+    try:
+        testcase_update_file(request_data, bak_status, new_status)
+    except:
+        return False
+    return True
+
+
+
+

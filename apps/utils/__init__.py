@@ -18,7 +18,7 @@ import string
 def get_values(values):
     tmp = {}
     for key in values:
-        tmp[key] = values.get(key).encode('utf8')
+        tmp[key] = values.get(key).encode('utf8').replace("'", "\"").replace("\n", "").replace("\t", "").replace("\r", "")
     return tmp
 
 
@@ -92,4 +92,19 @@ def del_old_file(file_path, reserve_count, buffer_count):
             os.remove(i)
 
 
-p = "/Users/licaifan/workspace/CITest/apps/report"
+
+
+
+# mystring=replace(mystring,chr(39),"&acute;") '替换单引号
+#
+# mystring=replace(mystring,chr(34),"&quot;")    '替换双引号
+#
+# mystring=replace(mystring,"<","&lt;")    '替换<
+#
+# mystring=replace(mystring,">","&gt;")    '替换>
+#
+# mystring=replace(mystring,chr(13),"<br>") '替换回车符
+#
+# mystring=replace(mystring,chr(32),"&nbsp;") '替换空格符
+#
+# mystring=replace(mystring,chr(9),"&nbsp; &nbsp; &nbsp; &nbsp;") '替换tab符

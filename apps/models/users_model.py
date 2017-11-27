@@ -33,3 +33,8 @@ class Users(BaseModel, UserMixin):
     @staticmethod
     def get_all_mail():
         return encodeutf8(db.session.query(Users.email).all())
+
+
+    @staticmethod
+    def get_user_data():
+        return db.session.query(Users.id, Users.name, Users.email)

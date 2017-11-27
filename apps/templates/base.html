@@ -1,19 +1,123 @@
 <!DOCTYPE HTML>
 <html lang="en">
-    <head>
-        <%block name="head">
-            <!--<link rel="stylesheet" href="style.css" />-->
-            <title>${ self.title() } - My Webpage</title>
-        </%block>
-    </head>
-    <body>
-        <div id="content">
-            <%block name="content"/>
-        </div>
-        <div id="footer">
-            <%block name="footer"/>
-        </div>
-    </body>
+<head>
+    <%block name="head">
+    <!--<link rel="stylesheet" href="style.css" />-->
+    <title>${ self.title() } - My Webpage</title>
+    <script type="text/javascript" src="/statics/js/jquery-3.2.1.min.js"></script>
+    <style>
+        .body {
+            with: 100%;
+        }
+
+        .center {
+            text-align: center;
+            width: 100%;
+        }
+
+        table.hovertable {
+            text-align: left;
+            margin-left: 25%;
+            width: 50%;
+            font-family: verdana, arial, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-width: 1px;
+            border-color: #999999;
+            border-collapse: collapse;
+
+        }
+
+        table.hovertable th {
+            background-color: #c3dde0;
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+
+        }
+
+        table.hovertable tr {
+            background-color: #d4e3e5;
+
+        }
+
+        table.hovertable td {
+
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #a9c6c9;
+        }
+
+        table.hovertable td.updateTr {
+
+            width: 20px;
+        }
+
+        table.hovertable td.deleteTr {
+
+            width: 20px;
+        }
+
+        .black_overlay {
+            display: none;
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            z-index: 1001;
+            -moz-opacity: 0.8;
+            opacity: .80;
+            filter: alpha(opacity=80);
+        }
+
+        .white_content {
+            display: none;
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 90%;
+            border: 6px solid lightblue;
+            background-color: white;
+            z-index: 1002;
+            overflow: auto;
+        }
+
+        .white_content_small {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 30%;
+            width: 40%;
+            height: 50%;
+            border: 16px solid lightblue;
+            background-color: white;
+            z-index: 1002;
+            overflow: auto;
+        }
+
+        input[type="text"] {
+            width: 300px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+    </%block>
+</head>
+<body>
+<div id="content">
+    <%block name="content"/>
+</div>
+<div id="footer">
+    <%block name="footer"/>
+</div>
+</body>
 </html>
 
 <%def name="title()">

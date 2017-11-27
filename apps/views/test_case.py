@@ -6,18 +6,18 @@
 
 
 from apps.app import app
-from flask import request, flash, url_for, redirect
+from flask import request, flash, url_for, redirect, jsonify
 from flask_mako import render_template
 from apps.utils import get_values
 from apps.helper.testcase_helper import testcase_set_helper, testcase_helper, testcase_list_helper, \
-    testcase_update_helper, testcase_delete_helper
+    testcase_update_helper, testcase_delete_helper, testcase_update_set_helper
 
 
-@app.route('/testcase')
+@app.route('/testcase', methods=['POST'])
 def testcase():
-    # testcase_helper()
-    flash('Execute successfully!')
-    return redirect(url_for('index'))
+    if request.method == 'POST':
+        testcase_helper()
+        return jsonify({'msg': 'Execute successfully!'})
 
 
 @app.route('/testcase/set', methods=['GET', 'POST'])
@@ -27,29 +27,40 @@ def testcase_set():
 
     elif request.method == 'POST':
         request_data = get_values(request.values)
-        testcase_set_helper(request_data)
+        res = testcase_set_helper(request_data)
+        if res:
+            flash('testcase successfully added!')
+        return redirect(url_for('index'))
 
-        return 'testcase successfully added!'
 
-
-@app.route('/testcase/list', methods=['GET'])
-def testcase_list():
+@app.route('/testcase/list/<status>', methods=['GET'])
+def testcase_list(status):
     if request.method == 'GET':
-        rows = testcase_list_helper()
+        rows = testcase_list_helper(status)
         return render_template('testcase_list.html', **locals())
 
 
 @app.route('/testcase/update', methods=['POST'])
 def testcase_update():
     if request.method == 'POST':
-        testcase_update_helper()
-        flash('Modify successfully!')
-        return redirect(url_for('testcase/list'))
+        request_data = get_values(request.values)
+        update_data = testcase_update_helper(request_data)
+        return jsonify(update_data)
 
 
 @app.route('/testcase/delete', methods=['POST'])
 def testcase_delete():
     if request.method == 'POST':
-        testcase_delete_helper()
-        flash('Delete successfully!')
-        return redirect(url_for('testcase/list'))
+        request_data = get_values(request.values)
+        testcase_delete_helper(request_data)
+        return jsonify({'msg': 'Delete successfully!'})
+
+
+@app.route('/testcase/update/set', methods=['POST'])
+def testcase_update_set():
+    if request.method == 'POST':
+        request_data = get_values(request.values)
+        res = testcase_update_set_helper(request_data)
+        if res:
+            flash('Update successfully!')
+        return redirect(url_for('testcase_list', status='part'))

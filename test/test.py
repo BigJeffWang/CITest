@@ -7,8 +7,8 @@
 
 import sys
 from pathlib import Path
-print sys.path.append(str(Path(__file__).resolve().parent))
-print str(Path(__file__).resolve().parent)
+# print sys.path.append(str(Path(__file__).resolve().parent))
+# print str(Path(__file__).resolve().parent)
 
 import time
 import uuid
@@ -63,3 +63,39 @@ l.sort(reverse=True)
 print l
 for i in l[2:]:
     print i
+
+
+a = """
+asd
+zxc
+"""
+
+print a.replace("\n", "").replace("\t", "")
+
+
+for k, v in {'a': 'bb'}.items():
+    print k, v
+
+
+if not "":
+    print 11
+
+headers = ""
+
+if not headers:
+    headers = {'Content-Type': 'application/json'}
+print headers
+
+a = '{  "success": "GET"}'
+b = '{ "success"  :   "GET"  }'
+print a == b
+
+import json
+
+a = json.loads(a)
+b = json.loads(b)
+print a
+print type(a)
+print a == b
+
+assert(a == b)
