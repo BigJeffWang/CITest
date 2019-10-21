@@ -58,5 +58,5 @@ traceback2==1.4.0
 unittest2==1.1.0
 urllib3==1.22
 webencodings==0.5.1
-Werkzeug==0.12.2
+Werkzeug==0.15.3
 WTForms==2.1
