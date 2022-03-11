@@ -42,7 +42,7 @@ MySQL-python==1.2.5
 olefile==0.44
 passlib==1.7.1
 pathlib==1.0.1
-Pillow==4.3.0
+Pillow==9.0.1
 python-dateutil==2.6.1
 python-editor==1.0.3
 python-magic==0.4.13
