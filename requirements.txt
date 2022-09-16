@@ -35,7 +35,7 @@ Jinja2==2.10
 jsonschema==2.6.0
 libmagic==1.0
 linecache2==1.0.0
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 mimerender==0.6.0
 MySQL-python==1.2.5
